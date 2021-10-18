@@ -1,0 +1,87 @@
+[Установка VMware-Tools]
+------------------------
+1. apt install open-vm-tools open-vm-tools-desktop
+
+[Установка SharedFolder]
+------------------------
+1. vmware-hgfsclient
+2. vmhgfs-fuse .host:/ /mnt/ -o allow_other -o uid=1000
+3. nano /etc/fstab
+	(.host:/    /mnt/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0)
+
+[Установка OnlyOffice]
+----------------------
+1. apt install -f 
+2. dpkg -i onlyoffice-desktopeditors_amd64.deb
+
+[Установка VS Code]
+-------------------
+1. wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+2. add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+3. apt install code
+
+[Установка Python из исходников]
+--------------------------------
+1. apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev\
+	libffi-dev libsqlite3-dev wget libbz2-dev
+2. wget https://www.python.org/ftp/python/3.x.x/Python-3.x.x.tgz
+3. tar -xf Python-3.x.x.tgz
+4. cd Python-3.x.x
+5. ./configure --prefix=/opt/python-3.x.x/ --enable-optimizations --with-lto
+6. make -j4 (nproc)
+7. sudo make altinstall
+8. echo alias python3.x="/opt/python-3.x.x/bin/python3.x" >> ~/.bashrc
+9. echo alias pip3.x="/opt/python-3.x.x/bin/pip3.x" >> ~/.bashrc
+10. update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 2
+11. update-alternatives --install /usr/bin/python3 python3 /opt/python-3.x.x/bin/python3.x 1
+12. update-alternatives --list python3
+13. update-alternatives --config python3
+14. reboot
+
+[Установка Venv Python]
+1. apt install python3-virtualenv
+2. python3 -m venv venv
+3. Linux:
+	source venv/bin/activate (deactivate) # cd ~ && source venv/bin/activate
+   Windows:
+	.\venv\Scripts\activate.bat (.\venv\Scripts\deactivate.bat)
+
+[Установка nftables из исходников]
+----------------------------------
+1. wget https://www.netfilter.org/pub/libmnl/libmnl-1.0.4.tar.bz2
+2. wget https://www.netfilter.org/pub/libnftnl/libnftnl-1.2.0.tar.bz2
+3. wget https://www.netfilter.org/pub/nftables/nftables-1.0.0.tar.bz2
+4. apt install libgmp-dev
+5. tar xvjf *.tar.bz2 (for 1,2,3)
+6. ./configure (for 1,2,3)
+7. make
+8. make install
+9. echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> ~/.bashrc
+10. reboot
+[Установка Docker]
+------------------
+1. apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+2. curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+	 | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+3. echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg]
+	https://download.docker.com/linux/ubuntu \
+  	$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+4. apt-get update
+5. apt-get install docker-ce docker-ce-cli containerd.io
+
+[SUDO без пароля]
+-----------------
+1. visudo
+2. %sudo ALL=(ALL:ALL) NOPASSWD: ALL
+
+[Common]
+--------
+0. apt update & apt upgrade 
+1. Setting -> Power -> Blankk Screen (Never)
+2. Tweaks -> Keyboard & Mouse -> Additional Layout Option -> Switching to another layout
+2. apt install gnome-tweak-tool
+3. apt install openssh-server
+4. apt install software-properties-common apt-transport-https wget
+5. apt install net-tools ifupdown nftables git
+

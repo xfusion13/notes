@@ -1,0 +1,101 @@
+General:
+	3. apt install python3-pip
+	4. pip3 install eel
+	6. apt install python3-scapy
+	9. apt install xterm	
+
+Gnome for Root:
+	1. passwd root
+	2. nano /etc/gdm3/custom.conf (before 'security' add "AllowRoot=true")
+	3. nano /etc/pam.d/gdm-password (comment row with "pam_succed_if.so user !=root quiet_success)
+
+Google Chrome:
+	1. wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	2. dpkg -i --force-depends google-chrome-stable_current_amd64.deb
+
+Goolge Chrome for Root:
+	1. nano /opt/google/chrome/google-chrome (add to exec flags:  --user-data-dir  --no-sandbox )
+
+X11 Forward:
+	1. nano /etc/ssh/sshd_config (X11Forwarding yes; X11DisplayOffset 10; PermitRootLogin yes)
+	2. systemctl restart ssh.service
+
+
+Install Mininet:
+	1. apt install mininet
+	2. git clone git://github.com/mininet/mininet
+	3. mininet/util/install.sh -a
+	4. apt-get install python3-tk
+
+
+[error]missing: apparmor 
+	1.export PATH=$PATH:/usr/sbin
+
+SAMBA (debian 11):
+	1. apt install samba smbclient
+	2. touch /etc/samba/smb.conf
+	3. smbpasswd -an $xf
+	4. chmod -R 777 [dir]
+	5. nano  /etc/samba/smb.conf
+		[hass]
+		comment = hass config
+		path = /usr/share/hassio/
+		read only = no
+		browsable = yes
+		guest ok = yes
+	
+	6. systemctl restart smbd
+
+
+VENV Windows (cmd):
+	1. python -m venv venv
+	2. .\win-venv\Scripts\activate.bat
+	2. .\venv\Scripts\deactivate.bat
+
+Qt Designer:
+	0. pip install PyQt6 
+	1. pyuic6 ui_imagedialog.ui -o ui_imagedialog.py
+
+
+print(json.dumps(setting.argsDict, indent = 4))
+
+
+apt intall python3-pip python3-venv
+python3 -m venv venv
+source venv/bin/activate (deactivate)
+pip3 install pyqt5
+
+conditions = [item for item in conditions if item]
+
+
+The issue is that libresolutionKMS.so is not loaded into the Wayland session on Fedora 33 (tested w/ VMWare Workstation 16). It works as expected in Ubuntu 20.10 with either Wayland or Xorg.
+
+
+cp /etc/vmware-tools/tools.conf.example /etc/vmware-tools/tools.conf
+
+nano /etc/vmware-tools/tools.conf
+
+Remove the # from this block:
+
+[resolutionKMS]
+
+# Default is true if tools finds an xf86-video-vmware driver with
+# version >= 13.2.0. If you don't have X installed, set this to true manually.
+# This only affects tools for Linux.
+enable=true
+
+systemctl restart vmtoolsd.service
+
+
+
+Переброс файлов:
+переустановить tools и перезапутить хост 
+
+
+import time
+start_time = time.time()
+print(f"--> {time.time() - start_time} seconds")
+
+
+apt remove --autoremove python3.10
+
