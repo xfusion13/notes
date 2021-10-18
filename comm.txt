@@ -46,12 +46,6 @@ SAMBA (debian 11):
 	
 	6. systemctl restart smbd
 
-
-VENV Windows (cmd):
-	1. python -m venv venv
-	2. .\win-venv\Scripts\activate.bat
-	2. .\venv\Scripts\deactivate.bat
-
 Qt Designer:
 	0. pip install PyQt6 
 	1. pyuic6 ui_imagedialog.ui -o ui_imagedialog.py
