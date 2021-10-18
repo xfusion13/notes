@@ -75,6 +75,14 @@
 1. visudo
 2. %sudo ALL=(ALL:ALL) NOPASSWD: ALL
 
+[Работа с git]
+1. git init
+2. git config --global user.name user.email
+3. git add .  
+4. git commit -m "first commit"
+5. git remote add origin https://github.com/xfusion13/xxx.git
+6. git push -u origin main
+
 [Common]
 --------
 0. apt update & apt upgrade 
